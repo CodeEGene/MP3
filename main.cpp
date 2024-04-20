@@ -11,18 +11,21 @@ void displayBoard(char board[]);
 void displayGameStats(int ties, int player1Score, int player2Score);
 string getPlayersName();
 
-bool firstPlayersTurn = true;
-bool gameNotOver = true;
-string firstPlayer;
-string secondPlayer;
-string currentPlayer;
-char currentMark = 'O';
-
-char board[55] = { ' ', '7',' ', '|', ' ', '8', ' ', '|', ' ', '9', ' ', '-', '-','-', '+', '-', '-', '-', '+', '-', '-', '-' ,  ' ', '4',' ', '|', ' ', '5', ' ', '|', ' ', '6', ' ', '-', '-','-', '+', '-', '-', '-', '+', '-', '-', '-' ,  ' ', '1',' ', '|', ' ', '2', ' ', '|', ' ', '3', ' ' };
-
+const int BOARD_SIZE = 55;
 
 
 int main() {
+
+	char board[BOARD_SIZE] = { ' ', '7',' ', '|', ' ', '8', ' ', '|', ' ', '9', ' ', '-', '-','-', '+', '-', '-', '-', '+', '-', '-', '-' ,  ' ', '4',' ', '|', ' ', '5', ' ', '|', ' ', '6', ' ', '-', '-','-', '+', '-', '-', '-', '+', '-', '-', '-' ,  ' ', '1',' ', '|', ' ', '2', ' ', '|', ' ', '3', ' ' };
+	bool firstPlayersTurn = true;
+	bool gameNotOver = true;
+	string firstPlayer;
+	string secondPlayer;
+	string currentPlayer;
+	char currentMark = 'X';
+
+
+
 	cout << "What is player 1's name: ";
 	firstPlayer = getPlayersName();
 
@@ -46,11 +49,11 @@ int main() {
 		}
 		if (currentPlayer == secondPlayer) {
 			currentPlayer = firstPlayer;
-			currentMark = 'O';
+			currentMark = 'X';
 		}
 		else {
 			currentPlayer = secondPlayer;
-			currentMark = 'X';
+			currentMark = 'O';
 		}
 
 		displayBoard(board);
@@ -211,15 +214,17 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 	}
 }
 void clearBoard(char board[]) {
-
-
+	char clearedBoard[BOARD_SIZE] = {' ', '7',' ', '|', ' ', '8', ' ', '|', ' ', '9', ' ', '-', '-','-', '+', '-', '-', '-', '+', '-', '-', '-' ,  ' ', '4',' ', '|', ' ', '5', ' ', '|', ' ', '6', ' ', '-', '-','-', '+', '-', '-', '-', '+', '-', '-', '-' ,  ' ', '1',' ', '|', ' ', '2', ' ', '|', ' ', '3', ' '};
+	for (int i = 0; i < BOARD_SIZE; i++) {
+		board[i] = clearedBoard[i];
+	}
 }
 bool hasThreeInRow(char board[], char playerMark) {
 
 	return true;
 }
 void displayBoard(char board[]) {
-	for (int i = 0; i < 55; i++) {
+	for (int i = 0; i < BOARD_SIZE; i++) {
 		if (i % 11 == 0) {
 			cout << endl;
 		}
