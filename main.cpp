@@ -2,16 +2,25 @@
 
 using namespace std;
 
-int getPlayerInput(string playerName);
 bool isLegalMove(char board[], int location);
+int getPlayerInput(string playerName);
 void placeMarkOnBoard(char board[], char playerMark, int location);
 void clearBoard(char board[]);
-bool hasThreeInRow(char board[], char playerMark);
+bool hasThreeInRow(char board[]);
 void displayBoard(char board[]);
 void displayGameStats(int ties, int player1Score, int player2Score);
 string getPlayersName();
 
 const int BOARD_SIZE = 55;
+const int LOCATION_1 = 45;
+const int LOCATION_2 = 49;
+const int LOCATION_3 = 53;
+const int LOCATION_4 = 23;
+const int LOCATION_5 = 27;
+const int LOCATION_6 = 31;
+const int LOCATION_7 = 1;
+const int LOCATION_8 = 5;
+const int LOCATION_9 = 9;
 
 
 int main() {
@@ -47,6 +56,11 @@ int main() {
 			}
 			break;
 		}
+
+		if (hasThreeInRow(board)) {
+			break;
+		}
+
 		if (currentPlayer == secondPlayer) {
 			currentPlayer = firstPlayer;
 			currentMark = 'X';
@@ -104,26 +118,19 @@ string getPlayersName() {
 }
 
 bool isLegalMove(char board[], int location) {
-
-	return true;
+	if (board[location] != 'O' && board[location] != 'X') {
+		return true;
+	}
+	return false;
 }
-void placeMarkOnBoard(char board[], char playerMark, int location) {
 
-	int location1 = 45;
-	int location2 = 49;
-	int location3 = 53;
-	int location4 = 23;
-	int location5 = 27;
-	int location6 = 31;
-	int location7 = 1;
-	int location8 = 5;
-	int location9 = 9;
+void placeMarkOnBoard(char board[], char playerMark, int location) {
 
 	while (true) {
 		switch (location) {
 		case 1:
-			if (board[location1] != 'O' && board[location1] != 'X') {
-				board[location1] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_1] = playerMark;
 				return;
 			}
 			else {
@@ -132,8 +139,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 2:
-			if (board[location2] != 'O' && board[location2] != 'X') {
-				board[location2] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_2] = playerMark;
 				return;
 			}
 			else {
@@ -142,8 +149,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 3:
-			if (board[location3] != 'O' && board[location3] != 'X') {
-				board[location3] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_3] = playerMark;
 				return;
 			}
 			else {
@@ -152,8 +159,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 4:
-			if (board[location4] != 'O' && board[location4] != 'X') {
-				board[location4] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_4] = playerMark;
 				return;
 			}
 			else {
@@ -162,8 +169,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 5:
-			if (board[location5] != 'O' && board[location5] != 'X') {
-				board[location5] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_5] = playerMark;
 				return;
 			}
 			else {
@@ -172,8 +179,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 6:
-			if (board[location6] != 'O' && board[location6] != 'X') {
-				board[location6] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_6] = playerMark;
 				return;
 			}
 			else {
@@ -182,8 +189,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 7:
-			if (board[location7] != 'O' && board[location7] != 'X') {
-				board[location7] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_7] = playerMark;
 				return;
 			}
 			else {
@@ -192,8 +199,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 8:
-			if (board[location8] != 'O' && board[location8] != 'X') {
-				board[location8] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_8] = playerMark;
 				return;
 			}
 			else {
@@ -202,8 +209,8 @@ void placeMarkOnBoard(char board[], char playerMark, int location) {
 			}
 
 		case 9:
-			if (board[location9] != 'O' && board[location9] != 'X') {
-				board[location9] = playerMark;
+			if (isLegalMove(board, location)) {
+				board[LOCATION_9] = playerMark;
 				return;
 			}
 			else {
@@ -219,9 +226,33 @@ void clearBoard(char board[]) {
 		board[i] = clearedBoard[i];
 	}
 }
-bool hasThreeInRow(char board[], char playerMark) {
+bool hasThreeInRow(char board[]) {
 
-	return true;
+	if (LOCATION_1 == LOCATION_2 && LOCATION_2 == LOCATION_3) {
+		return true;
+	}
+	else if (LOCATION_4 == LOCATION_5 && LOCATION_5 == LOCATION_6) {
+		return true;
+	}
+	else if (LOCATION_7 == LOCATION_8 && LOCATION_8 == LOCATION_9) {
+		return true;
+	}
+	else if (LOCATION_1 == LOCATION_4 && LOCATION_4 == LOCATION_7) {
+		return true;
+	}
+	else if (LOCATION_2 == LOCATION_5 && LOCATION_5 == LOCATION_8) {
+		return true;
+	}
+	else if (LOCATION_3 == LOCATION_6 && LOCATION_6 == LOCATION_9) {
+		return true;
+	}
+	else if (LOCATION_1 == LOCATION_5 && LOCATION_5 == LOCATION_9) {
+		return true;
+	}
+	else if (LOCATION_7 == LOCATION_5 && LOCATION_5 == LOCATION_3) {
+		return true;
+	}
+	return false;
 }
 void displayBoard(char board[]) {
 	for (int i = 0; i < BOARD_SIZE; i++) {
